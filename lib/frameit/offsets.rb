@@ -24,7 +24,7 @@ module Frameit
               }
             when size::IOS_35
               return {
-                'offset' => "+59+260",
+                'offset' => "+60+260",
                 'width' => 647
               }
             when size::IOS_IPAD
