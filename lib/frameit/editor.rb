@@ -87,7 +87,7 @@ module Frameit
     def complex_framing
       background = generate_background
 
-      if self.frame # we have no frame on le mac
+      if self.frame && fetch_config["frame"] != false # we have no frame on le mac
         resize_frame!
         @image = put_into_frame
 
