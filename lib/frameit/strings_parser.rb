@@ -2,15 +2,15 @@ module Frameit
   # This class will parse the .string files
   class StringsParser
     def self.parse(path)
-      raise "Couldn't find strings file at path '#{path}'".red unless File.exist? path
-      raise "Must be .strings file, only got '#{path}'".red unless path.end_with? ".strings"
+      UI.user_error! "Couldn't find strings file at path '#{path}'" unless File.exist? path
+      UI.user_error! "Must be .strings file, only got '#{path}'" unless path.end_with? ".strings"
 
       result = {}
 
       # A .strings file is UTF-16 encoded. We only want to deal with UTF-8
       content = `iconv -f UTF-16 -t UTF-8 '#{path}'`
 
-      content.split("\n").each do |line|
+      content.split("\n").each_with_index do |line, index|
         begin
           # We don't care about comments and empty lines
           if line.start_with? '"'
@@ -20,8 +20,8 @@ module Frameit
             result[key] = value
           end
         rescue => ex
-          Helper.log.error ex
-          Helper.log.error line
+          UI.error "Error parsing #{path} line #{index + 1}: '#{line}'"
+          UI.verbose "#{ex.message}\n#{ex.backtrace.join('\n')}"
         end
       end
 
