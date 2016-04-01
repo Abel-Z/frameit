@@ -1,1 +1,1 @@
-This repos has moved to [https://github.com/samwize/fastlane/frameit](https://github.com/samwize/fastlane/frameit)
+This repos has moved to [https://github.com/samwize/fastlane/tree/master/frameit](samwize/fastlane)
